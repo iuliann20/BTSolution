@@ -1,9 +1,22 @@
+using BTSolution.DAL;
+using BTSolution.DAL.Repository.Classes;
+using BTSolution.DAL.Repository.Interfaces;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
+string connectionString = "Server=localhost; Database=BTSolution; Trusted_Connection=True; MultipleActiveResultSets=true";
+builder.Services.AddDbContext<BTSolutionDbContext>(options => options.UseSqlServer(connectionString));
 
+//repository
+builder.Services.AddTransient<IUserRepository, UserRepository>();
+builder.Services.AddTransient<IAccessTokenRepository, AccessTokenRepository>();
+//logic
+
+//helper
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

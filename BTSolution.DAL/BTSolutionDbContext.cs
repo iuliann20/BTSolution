@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BTSolution.DAL.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +14,7 @@ namespace BTSolution.DAL
         {
 
         }
+        public DbSet<User> Users { get; set; }
+        public DbSet<AccessToken> AccessTokens { get; set; }
     }
 }
