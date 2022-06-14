@@ -67,5 +67,19 @@ namespace BTSolution.DAL.Repository.Classes
             }).Where(x => x.CreationDate.AddSeconds(x.Duration) > DateTime.Now).ToList();
             return accessTokensDTO;
         }
+
+        public void DeleteTokenById(int id)
+        {
+            AccessToken accessToken = _dbContext.AccessTokens.FirstOrDefault(x => x.TokenId == id);
+            if (accessToken != null)
+            {
+                _dbContext.Remove(accessToken);
+                _dbContext.SaveChanges();
+            }
+            else
+            {
+                throw new DataException();
+            }
+        }
     }
 }

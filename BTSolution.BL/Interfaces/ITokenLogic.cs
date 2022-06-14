@@ -5,13 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BTSolution.DAL.Repository.Interfaces
+namespace BTSolution.BL.Interfaces
 {
-    public interface IAccessTokenRepository
+    public interface ITokenLogic
     {
         AccessTokenDTO AddToken(AccessTokenDTO accessTokenDTO);
         AccessTokenDTO GetTokenByUserId(int userId);
         List<AccessTokenDTO> GetAllValidTokensByUserId(int id);
         void DeleteTokenById(int id);
+        string GenerateOTP();
     }
 }
