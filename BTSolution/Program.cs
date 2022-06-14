@@ -1,3 +1,5 @@
+using BTSolution.BL.Classes;
+using BTSolution.BL.Interfaces;
 using BTSolution.DAL;
 using BTSolution.DAL.Repository.Classes;
 using BTSolution.DAL.Repository.Interfaces;
@@ -15,7 +17,8 @@ builder.Services.AddDbContext<BTSolutionDbContext>(options => options.UseSqlServ
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IAccessTokenRepository, AccessTokenRepository>();
 //logic
-
+builder.Services.AddTransient<ITokenLogic, TokenLogic>();
+builder.Services.AddTransient<IUserLogic, UserLogic>();
 //helper
 var app = builder.Build();
 

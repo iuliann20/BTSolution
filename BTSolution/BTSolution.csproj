@@ -28,6 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BTSolution.BL\BTSolution.BL.csproj" />
     <ProjectReference Include="..\BTSolution.DAL\BTSolution.DAL.csproj" />
   </ItemGroup>
 

@@ -7,5 +7,6 @@ namespace BTSolution.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+        private readonly IUserLogic _userLogic;
     }
 }

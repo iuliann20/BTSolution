@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BTSolution.DAL\BTSolution.DAL.csproj" />
+  </ItemGroup>
+
 </Project>
