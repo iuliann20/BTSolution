@@ -3,6 +3,8 @@ using BTSolution.BL.Interfaces;
 using BTSolution.DAL;
 using BTSolution.DAL.Repository.Classes;
 using BTSolution.DAL.Repository.Interfaces;
+using BTSolution.Helpers.Classes;
+using BTSolution.Helpers.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +22,7 @@ builder.Services.AddTransient<IAccessTokenRepository, AccessTokenRepository>();
 builder.Services.AddTransient<ITokenLogic, TokenLogic>();
 builder.Services.AddTransient<IUserLogic, UserLogic>();
 //helper
+builder.Services.AddTransient<IUserControllerHelper, UserControllerHelper>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -14,10 +14,6 @@ namespace BTSolution.Controllers
         {
             _tokenLogic = tokenLogic;
         }
-        [HttpGet]
-        public IActionResult GenerateOTP()
-        {
-            return Ok(_tokenLogic.GenerateOTP());
-        }
+        
     }
 }
