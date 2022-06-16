@@ -23,7 +23,7 @@ namespace BTSolution.Controllers
         /// Adds the user to the db
         /// </summary>
         /// <param name="user">user object to be added</param>
-        [HttpPost("{userName}")]
+        [HttpPost("AddUser/{userName}")]
         public IActionResult AddUser(string userName)
         {
             if (string.IsNullOrEmpty(userName))

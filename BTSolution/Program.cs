@@ -7,8 +7,19 @@ using BTSolution.Helpers.Classes;
 using BTSolution.Helpers.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
+
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy.WithOrigins("http://localhost:4200",
+                                              "https://localhost:44404");
+                      });
+});
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
@@ -35,6 +46,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+app.UseCors(MyAllowSpecificOrigins);
 
 
 app.MapControllerRoute(

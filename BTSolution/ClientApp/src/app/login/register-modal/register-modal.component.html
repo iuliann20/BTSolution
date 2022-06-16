@@ -1,0 +1,20 @@
+<div class="container mt-2 d-flex justify-content-around">
+  <button (click) = "open(userAddModal)" class="btn btn-success">Add User</button>
+  <app-login-modal></app-login-modal>
+</div>
+
+  <ng-template #userAddModal let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title">Create new user</h5>
+    </div>
+    <div class="modal-body">
+      <div class="form-floating">
+        <input type="text" class="form-control" [(ngModel)]="userName">
+        <label>Name</label>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="modal.close()">Cancel</button>
+      <button type="button" class="btn btn-success" (click)="this.addUser(); modal.close()">Create</button>
+    </div>
+  </ng-template>

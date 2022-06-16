@@ -14,6 +14,12 @@ namespace BTSolution.Controllers
         {
             _tokenLogic = tokenLogic;
         }
-        
+        [HttpGet]
+        [Route("GenerateToken/{userId}/{duration}")]
+        public IActionResult GenerateToken()
+        {
+            var token = _tokenLogic.GenerateOTP();
+            return Ok(token);
+        }
     }
 }
