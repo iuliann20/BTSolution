@@ -39,7 +39,7 @@ namespace BTSolution.DAL.Repository.Classes
             User user = _dbContext.Users.FirstOrDefault(x => x.UserName == userName);
             if(user == null)
             {
-                throw new DataException();
+                return null;
             }
             return new UserDTO
             {

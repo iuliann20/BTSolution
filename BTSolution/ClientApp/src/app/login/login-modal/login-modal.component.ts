@@ -15,6 +15,7 @@ export class LoginModalComponent implements OnInit {
   public token: string = '';
   public isTokenGenerated: boolean = false;
   public isUserLogin: boolean = false;
+  public isLoadingToken: boolean = false;
   timeLeft: number = 0;
   interval: any;
   constructor(private modalService: NgbModal, private readonly userService: UserService, private readonly accessTokenService: AccessTokenService) { }
@@ -28,11 +29,10 @@ export class LoginModalComponent implements OnInit {
 
   public checkIfUserNameInputIsEmpty() {
     if (this.userName != undefined) {
-      this.isTokenGenerated = true;
+      this.isLoadingToken = true;
       this.getUserByUserName();
     } else {
       console.log("please insert user name");
-
     }
   }
 
@@ -43,7 +43,7 @@ export class LoginModalComponent implements OnInit {
         this.isUserLogin = true;
       }
     }, error => {
-      console.log("nu a mers");
+      console.log("login failed");
     })
   }
 
@@ -54,6 +54,8 @@ export class LoginModalComponent implements OnInit {
         this.timeLeft--;
       } else {
         this.accessTokenService.generateToken(result.userId).subscribe(result => {
+          this.isLoadingToken = false;
+          this.isTokenGenerated = true;
           this.tokenGenerated = result.token;
         }, error => {
           console.log(error);
@@ -77,11 +79,14 @@ export class LoginModalComponent implements OnInit {
   private getUserByUserName(): void {
     this.userService.getUserByUserName(this.userName).subscribe(
       result => {
-        this.startTimer(result);
+        if (result != null) {
+          this.startTimer(result);
+        } else {
+          this.isTokenGenerated = false;
+          console.log("user not found")
+        }
       }, error => {
         console.log(error);
-        return null;
-
       }
     );
   }
