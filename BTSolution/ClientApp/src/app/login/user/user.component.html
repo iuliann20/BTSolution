@@ -1,0 +1,18 @@
+
+<button (click)="open(userAddModal); getAllUsers()" class="btn btn-success">All Users</button>
+<ng-template #userAddModal let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title">All User</h5>
+    </div>
+    <div class="modal-body">
+        <p class="fw-bold" *ngIf="this.users.length == 0">Currently there are no users registered</p>
+        <div id="userList" class="d-flex align-content-start flex-wrap mt-2" *ngIf="this.users.length > 0">
+            <app-user-card *ngFor="let user of this.users" class="col-12" [userId]="user.userId"
+                [userName]="user.userName"></app-user-card>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="modal.close()">Cancel</button>
+    </div>
+</ng-template>

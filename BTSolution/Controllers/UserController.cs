@@ -39,6 +39,7 @@ namespace BTSolution.Controllers
         ///     Returns all the users from the db
         /// </summary>
         [HttpGet]
+        [Route("GetAllUsers")]
         public ActionResult<List<UserDTO>> GetAllUsers()
         {
             var userList = _userLogic.GetAllUsers();
@@ -49,7 +50,8 @@ namespace BTSolution.Controllers
         /// Removes the user from the db
         /// </summary>
         /// <param name="userId"></param>
-        [HttpDelete("{userId}")]
+        [HttpGet]
+        [Route("RemoveUser/{userId}")]
         public ActionResult DeleteUser(int userId)
         {
             if (userId < 0)

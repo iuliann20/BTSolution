@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from '../login.service';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import { User } from 'src/app/models/user-model';
+import { LoginService } from '../services/login.service';
 
 
 @Component({
@@ -12,7 +12,7 @@ import { User } from 'src/app/models/user-model';
 export class RegisterModalComponent implements OnInit {
   public userName: any;
 
-  constructor(private readonly loginService: LoginService, private modalService: NgbModal) { }
+  constructor( private readonly modalService: NgbModal, private readonly loginService:LoginService) { }
 
   ngOnInit(): void {
   }
@@ -20,7 +20,7 @@ export class RegisterModalComponent implements OnInit {
   
 
   public addUser():void{
-    this.loginService.addUser(this.userName).subscribe(result=>{
+    this.loginService.addUser(this.userName).subscribe((result: any)=>{
       this.userName = '';
       console.log(result);
     });
