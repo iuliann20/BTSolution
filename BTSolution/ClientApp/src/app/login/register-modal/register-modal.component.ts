@@ -22,11 +22,9 @@ export class RegisterModalComponent implements OnInit {
   public addUser():void{
     this.loginService.addUser(this.userName).subscribe((result: any)=>{
       this.userName = '';
-      console.log(result);
+    }, error => {
+      console.log(error);
     });
-  }
-  getUserName(name: string): void {
-    this.userName = name;
   }
   open(content: any) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-title'}).result;

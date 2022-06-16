@@ -38,8 +38,8 @@ export class LoginModalComponent implements OnInit {
 
 
   public loginUser(): void {
-    this.accessTokenService.getToken(this.tokenGenerated).subscribe(result => {
-      if (result.IsValid) {
+    this.accessTokenService.checkIfTokenIsValid(this.token).subscribe(result => {
+      if (result && result.isValid) {
         this.isUserLogin = true;
       }
     }, error => {
@@ -73,7 +73,9 @@ export class LoginModalComponent implements OnInit {
     this.isTokenGenerated = false;
   }
 
-  public logoutUser() {
+  public closeModal(): void {
+  }
+  public logoutUser(): void {
     this.isUserLogin = false;
   }
   private getUserByUserName(): void {
@@ -82,6 +84,7 @@ export class LoginModalComponent implements OnInit {
         if (result != null) {
           this.startTimer(result);
         } else {
+          this.isLoadingToken = false;
           this.isTokenGenerated = false;
           console.log("user not found")
         }

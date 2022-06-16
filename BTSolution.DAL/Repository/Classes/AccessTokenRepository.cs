@@ -31,17 +31,16 @@ namespace BTSolution.DAL.Repository.Classes
                 Duration = accessToken.Duration,
                 Token = accessToken.Token,
                 TokenId = accessToken.TokenId,
-                UserId = accessToken.UserId,
-                IsValid = accessToken.CreationDate.AddSeconds(accessToken.Duration) > DateTime.Now ? true : false
+                UserId = accessToken.UserId
             };
         }
 
         public AccessTokenDTO GetToken(string token)
         {
             AccessToken accessToken = _dbContext.AccessTokens.FirstOrDefault(x => x.Token == token);
-            if(accessToken == null)
+            if (accessToken == null)
             {
-                throw new Exception();
+                return null;
             }
             AccessTokenDTO accessTokenDTO = new AccessTokenDTO
             {
@@ -50,7 +49,7 @@ namespace BTSolution.DAL.Repository.Classes
                 TokenId = accessToken.TokenId,
                 Token = accessToken.Token,
                 UserId = accessToken.UserId,
-                IsValid = accessToken.CreationDate.AddSeconds(accessToken.Duration)>DateTime.Now ? true : false
+                IsValid = accessToken.CreationDate.AddSeconds(accessToken.Duration) > DateTime.Now ? true : false
             };
             return accessTokenDTO;
         }
@@ -102,6 +101,15 @@ namespace BTSolution.DAL.Repository.Classes
                 throw new DataException();
             }
         }
-        
+        public void DeleteInvalidTokensByUserId(int userId)
+        {
+            List<AccessToken> accessTokens = _dbContext.AccessTokens.Where(x => x.UserId == userId && x.CreationDate.AddSeconds(x.Duration) < DateTime.Now).ToList();
+            if (accessTokens.Count > 0)
+            {
+                _dbContext.RemoveRange(accessTokens);
+                _dbContext.SaveChanges();
+            }
+        }
+
     }
 }

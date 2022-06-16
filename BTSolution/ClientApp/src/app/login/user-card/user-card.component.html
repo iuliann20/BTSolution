@@ -1,5 +1,6 @@
 <div class="d-flex mt-2">
-    <p class="me-2">{{id}}</p>
-    <p class="me-2">{{name}}</p>
-    <button type="button" class="btn btn-danger ms-2 ms-auto" (click)="this.removeUser()">Remove</button>
-  </div>
+  <p class="me-2">{{id}}</p>
+  <p class="me-2">{{name}}</p>
+  <button type="button" class="btn btn-danger ms-2 ms-auto" (click)="this.removeUser()">Remove</button>
+  <button type="button" class="btn btn-danger ms-2 ms-auto" (click)="this.deleteInvalidUserTokens()">Remove invalid tokens</button>
+</div>

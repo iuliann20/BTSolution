@@ -37,7 +37,7 @@ namespace BTSolution.DAL.Repository.Classes
         public UserDTO GetUserByName(string userName)
         {
             User user = _dbContext.Users.FirstOrDefault(x => x.UserName == userName);
-            if(user == null)
+            if (user == null)
             {
                 return null;
             }

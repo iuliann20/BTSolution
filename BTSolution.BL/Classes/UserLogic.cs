@@ -20,13 +20,13 @@ namespace BTSolution.BL.Classes
 
         public UserDTO AddUser(UserDTO userDTO)
         {
-            var user = _userRepository.AddUser(userDTO);
+            UserDTO user = _userRepository.AddUser(userDTO);
             return user;
         }
 
         public UserDTO GetUserByName(string userName)
         {
-            var user = _userRepository.GetUserByName(userName);
+            UserDTO user = _userRepository.GetUserByName(userName);
             return user;
         }
 

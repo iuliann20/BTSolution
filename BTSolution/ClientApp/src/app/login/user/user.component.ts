@@ -25,6 +25,8 @@ export class UserComponent implements OnInit {
       }
     });
   }
+
+  
   open(content: any) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-title'}).result;
   }

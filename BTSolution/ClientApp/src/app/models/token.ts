@@ -4,5 +4,5 @@ export interface AccessToken {
   token: string;
   userId: number;
   userName: string;
-  IsValid: boolean;
+  isValid: boolean;
 }

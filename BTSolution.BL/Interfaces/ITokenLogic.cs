@@ -15,5 +15,6 @@ namespace BTSolution.BL.Interfaces
         void DeleteTokenById(int id);
         string GenerateOTP();
         AccessTokenDTO GetToken(string token);
+        void DeleteInvalidTokensByUserId(int userId);
     }
 }

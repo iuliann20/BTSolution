@@ -27,11 +27,24 @@ namespace BTSolution.Controllers
             return Ok(_tokenLogic.AddToken(tokenDTO));
         }
         [HttpGet]
-        [Route("GetToken/{token}")]
-        public IActionResult GetToken(string token)
+        [Route("CheckIfTokenIsValid/{token}")]
+        public IActionResult CheckIfTokenIsValid(string token)
         {
             var tokenFromDb = _tokenLogic.GetToken(token);
             return Ok(tokenFromDb);
+        }
+
+        [HttpGet]
+        [Route("DeleteInvalidUserTokens/{userId}")]
+        public IActionResult DeleteInvalidUserTokens(int userId)
+        {
+            if (userId == 0)
+            {
+                return BadRequest();
+            }
+            _tokenLogic.DeleteInvalidTokensByUserId(userId);
+            return Ok();
+
         }
     }
 }

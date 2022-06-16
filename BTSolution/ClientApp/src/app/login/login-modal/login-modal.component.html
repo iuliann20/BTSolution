@@ -1,12 +1,12 @@
-<button (click)="open(userAddModal)" class="btn btn-success">Login</button>
+<button (click)="open(loginUserModal)" class="btn btn-success">Login</button>
 
-<ng-template #userAddModal let-modal>
+<ng-template #loginUserModal let-modal>
   <div class="modal-header" >
     <h5 class="modal-title">Login</h5>
   </div>
   <div class="modal-body">
-    <div class="form-floating">
-      <input type="text" class="form-control" [(ngModel)]="userName">
+    <div class="form-floating" *ngIf="!isUserLogin">
+      <input type="text" class="form-control" [(ngModel)]="userName" >
       <label>Name</label>
     </div>
     <div class="form-floating mt-1" *ngIf="isTokenGenerated && !isUserLogin">
@@ -14,8 +14,8 @@
       <label>Token</label>
     </div>
     <div class="form-floating mt-1" *ngIf="isTokenGenerated && !isUserLogin">
-      <h4> Time left: {{timeLeft}}</h4>
-      <h4>Token Generated:{{tokenGenerated}}</h4>
+      <h3> Time left: {{timeLeft}}</h3>
+      <h3>Token Generated:{{tokenGenerated}}</h3>
     </div>
     <div class="spinner-border text-primary" *ngIf="isLoadingToken" role="status">
       <span class="sr-only"></span>

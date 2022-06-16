@@ -13,7 +13,11 @@ export class AccessTokenService {
     return this.http.get<AccessToken>(`${environment.apiUrl}/api/Token/GenerateToken/${userId}`);
   }
 
-  public getToken(token: string): Observable<AccessToken> {
-    return this.http.get<AccessToken>(`${environment.apiUrl}/api/Token/GetToken/${token}`);
+  public checkIfTokenIsValid(token: string): Observable<AccessToken> {
+    return this.http.get<AccessToken>(`${environment.apiUrl}/api/Token/CheckIfTokenIsValid/${token}`);
+  }
+
+  public deleteInvalidTokensByUserId(userId: number) {
+    return this.http.get(`${environment.apiUrl}/api/Token/DeleteInvalidUserTokens/${userId}`);
   }
 }

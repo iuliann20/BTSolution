@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AccessTokenService } from '../services/access-token.service';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { UserService } from '../services/user.service';
 export class UserCardComponent implements OnInit {
   @Input("userId") id = 0;
   @Input("userName") name = "";
-  constructor(private readonly userService:UserService) { }
+  constructor(private readonly userService: UserService, private readonly accessTokenService: AccessTokenService) { }
 
   ngOnInit(): void {
   }
@@ -17,6 +18,14 @@ export class UserCardComponent implements OnInit {
     this.userService.removeUser(this.id).subscribe(result => {
       console.log("success");
       location.reload();
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  public deleteInvalidUserTokens() {
+    this.accessTokenService.deleteInvalidTokensByUserId(this.id).subscribe(result => {
+
     }, error => {
       console.log(error);
     });
