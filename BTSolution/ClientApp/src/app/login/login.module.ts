@@ -10,6 +10,7 @@ import { LoginModalComponent } from './login-modal/login-modal.component';
 import { UserComponent } from './user/user.component';
 import { UserCardComponent } from './user-card/user-card.component';
 import { UserService } from './services/user.service';
+import { AccessTokenService } from './services/access-token.service';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { UserService } from './services/user.service';
   ],
   providers:[
     LoginService,
-    UserService
+    UserService,
+    AccessTokenService
   ]
 })
 export class LoginModule { }

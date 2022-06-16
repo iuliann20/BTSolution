@@ -13,5 +13,6 @@ namespace BTSolution.DAL.Repository.Interfaces
         AccessTokenDTO GetTokenByUserId(int userId);
         List<AccessTokenDTO> GetAllValidTokensByUserId(int id);
         void DeleteTokenById(int id);
+        AccessTokenDTO GetToken(string token);
     }
 }

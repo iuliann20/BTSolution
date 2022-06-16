@@ -34,6 +34,7 @@ builder.Services.AddTransient<ITokenLogic, TokenLogic>();
 builder.Services.AddTransient<IUserLogic, UserLogic>();
 //helper
 builder.Services.AddTransient<IUserControllerHelper, UserControllerHelper>();
+builder.Services.AddTransient<ITokenControllerHelper, TokenControllerHelper>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

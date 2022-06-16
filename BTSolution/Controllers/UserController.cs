@@ -63,5 +63,17 @@ namespace BTSolution.Controllers
 
             return Ok();
         }
+
+        [HttpGet]
+        [Route("GetUserByUserName/{userName}")]
+        public IActionResult GetUserByUserName(string userName)
+        {
+            if (userName == null)
+            {
+                return BadRequest();
+            }
+            UserDTO userDTO = _userLogic.GetUserByName(userName);
+            return Ok(userDTO);
+        }
     }
 }

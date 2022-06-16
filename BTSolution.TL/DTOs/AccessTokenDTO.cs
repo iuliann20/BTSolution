@@ -13,5 +13,6 @@ namespace BTSolution.TL.DTOs
         public int Duration { get; set; }
         public string Token { get; set; }
         public int UserId { get; set; }
+        public bool IsValid { get; set; }
     }
 }

@@ -16,6 +16,7 @@ export class UserCardComponent implements OnInit {
   public removeUser(): void {
     this.userService.removeUser(this.id).subscribe(result => {
       console.log("success");
+      location.reload();
     }, error => {
       console.log(error);
     });

@@ -1,23 +1,32 @@
 <button (click)="open(userAddModal)" class="btn btn-success">Login</button>
 
 <ng-template #userAddModal let-modal>
-  <div class="modal-header">
+  <div class="modal-header" >
     <h5 class="modal-title">Login</h5>
   </div>
   <div class="modal-body">
     <div class="form-floating">
       <input type="text" class="form-control" [(ngModel)]="userName">
       <label>Name</label>
-
     </div>
-    <div class="form-floating mt-1" *ngIf="isTokenGenerated">
+    <div class="form-floating mt-1" *ngIf="isTokenGenerated && !isUserLogin">
       <input type="text" class="form-control" [(ngModel)]="token">
       <label>Token</label>
     </div>
+    <div class="form-floating mt-1" *ngIf="isTokenGenerated && !isUserLogin">
+      <h4> Time left: {{timeLeft}}</h4>
+      <h4>Token Generated:{{tokenGenerated}}</h4>
+    </div>
+    <div class="form-floating mt-1" *ngIf="isUserLogin">
+      <h2>Hello {{userName}}</h2>
+    </div>
+
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-success" (click)="this.checkIfUserNameInputIsEmpty()"> Generate Token</button>
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="modal.close()">Cancel</button>
-    <button type="button" class="btn btn-success" (click)="this.getUserByUserName(); modal.close()">Login</button>
+    <button *ngIf="!isUserLogin" type="button" class="btn btn-success" (click)="this.checkIfUserNameInputIsEmpty()"> Generate Token</button>
+    <button *ngIf="!isUserLogin" type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="modal.close(); pauseTimer()">Cancel</button>
+    <button *ngIf="!isUserLogin" type="button" class="btn btn-success" (click)="this.loginUser()">Login</button>
+    <button *ngIf="isUserLogin" type="button" class="btn btn-success" (click)="this.logoutUser()">Logout</button>
+
   </div>
 </ng-template>

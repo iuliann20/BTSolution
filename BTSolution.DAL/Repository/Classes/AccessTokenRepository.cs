@@ -28,13 +28,32 @@ namespace BTSolution.DAL.Repository.Classes
             return new AccessTokenDTO
             {
                 CreationDate = accessToken.CreationDate,
-                Duration = accessTokenDTO.Duration,
-                Token = accessTokenDTO.Token,
-                TokenId = accessTokenDTO.TokenId,
-                UserId = accessTokenDTO.UserId
+                Duration = accessToken.Duration,
+                Token = accessToken.Token,
+                TokenId = accessToken.TokenId,
+                UserId = accessToken.UserId,
+                IsValid = accessToken.CreationDate.AddSeconds(accessToken.Duration) > DateTime.Now ? true : false
             };
         }
 
+        public AccessTokenDTO GetToken(string token)
+        {
+            AccessToken accessToken = _dbContext.AccessTokens.FirstOrDefault(x => x.Token == token);
+            if(accessToken == null)
+            {
+                throw new Exception();
+            }
+            AccessTokenDTO accessTokenDTO = new AccessTokenDTO
+            {
+                CreationDate = accessToken.CreationDate,
+                Duration = accessToken.Duration,
+                TokenId = accessToken.TokenId,
+                Token = accessToken.Token,
+                UserId = accessToken.UserId,
+                IsValid = accessToken.CreationDate.AddSeconds(accessToken.Duration)>DateTime.Now ? true : false
+            };
+            return accessTokenDTO;
+        }
         public AccessTokenDTO GetTokenByUserId(int userId)
         {
             AccessToken accessToken = _dbContext.AccessTokens.FirstOrDefault(x => x.UserId == userId);
@@ -46,7 +65,8 @@ namespace BTSolution.DAL.Repository.Classes
                     CreationDate = accessToken.CreationDate,
                     Token = accessToken.Token,
                     Duration = accessToken.Duration,
-                    UserId = userId
+                    UserId = userId,
+                    IsValid = accessToken.CreationDate.AddSeconds(accessToken.Duration) > DateTime.Now ? true : false
                 };
             }
             else
@@ -63,7 +83,8 @@ namespace BTSolution.DAL.Repository.Classes
                 Duration = x.Duration,
                 TokenId = x.TokenId,
                 Token = x.Token,
-                UserId = x.UserId
+                UserId = x.UserId,
+                IsValid = x.CreationDate.AddSeconds(x.Duration) > DateTime.Now ? true : false
             }).Where(x => x.CreationDate.AddSeconds(x.Duration) > DateTime.Now).ToList();
             return accessTokensDTO;
         }

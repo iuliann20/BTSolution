@@ -41,6 +41,10 @@ namespace BTSolution.BL.Classes
             _accessTokenRepository.DeleteTokenById(id);
         }
 
+        public AccessTokenDTO GetToken(string token)
+        {
+            return _accessTokenRepository.GetToken(token);
+        }
         public string GenerateOTP()
         {
             string alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
