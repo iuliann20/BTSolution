@@ -25,7 +25,7 @@ export class UserCardComponent implements OnInit {
 
   public deleteInvalidUserTokens() {
     this.accessTokenService.deleteInvalidTokensByUserId(this.id).subscribe(result => {
-
+      location.reload();
     }, error => {
       console.log(error);
     });

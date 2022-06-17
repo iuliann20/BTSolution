@@ -77,6 +77,11 @@ export class LoginModalComponent implements OnInit {
   }
   public logoutUser(): void {
     this.isUserLogin = false;
+    clearInterval(this.interval);
+    this.token = '';
+    this.userName = '';
+    this.timeLeft = 0;
+    this.isTokenGenerated = false;
   }
   private getUserByUserName(): void {
     this.userService.getUserByUserName(this.userName).subscribe(
