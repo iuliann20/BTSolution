@@ -22,14 +22,22 @@ namespace BTSolution.Controllers
         [Route("GenerateToken/{userId}")]
         public IActionResult GenerateToken(int userId)
         {
+            if (userId == 0)
+            {
+                return BadRequest();
+            }
             string? token = _tokenLogic.GenerateOTP();
-            AccessTokenDTO tokenDTO = _tokenControllerHelper.BuildAccessTokenDTO(token, userId);
-            return Ok(_tokenLogic.AddToken(tokenDTO));
+            AccessTokenDTO tokenDTO = _tokenLogic.AddToken(_tokenControllerHelper.BuildAccessTokenDTO(token, userId));
+            return Ok(tokenDTO);
         }
         [HttpGet]
         [Route("CheckIfTokenIsValid/{token}")]
         public IActionResult CheckIfTokenIsValid(string token)
         {
+            if (token == null)
+            {
+                return BadRequest();
+            }
             var tokenFromDb = _tokenLogic.GetToken(token);
             return Ok(tokenFromDb);
         }
